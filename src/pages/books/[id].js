@@ -4,6 +4,7 @@ import BookForm from '../../components/BookForm';
 
 export default function EditBook() {
   const router = useRouter();
+  
   const { id } = router.query;
   const [book, setBook] = useState(null);
 
@@ -30,5 +31,31 @@ export default function EditBook() {
   };
 
   if (!book) return <p>Loading...</p>;
-  return <BookForm initialData={book} onSubmit={updateBook} />;
+  return (
+    <div className="edit-book-container">
+      <h2>Edit Book</h2>
+      <BookForm initialData={book} onSubmit={updateBook} />
+      <style jsx>{`
+        .edit-book-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          background: #f3f4f6;
+        }
+        h2 {
+          margin-bottom: 24px;
+          color: #1e3a8a;
+        }
+        .edit-book-container :global(form) {
+          background: #fff;
+          padding: 2rem 2.5rem;
+          border-radius: 10px;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+          min-width: 320px;
+        }
+      `}</style>
+    </div>
+  );
 }
